@@ -141,3 +141,63 @@ body {
    content: '';
    @apply absolute bottom-0 left-0 w-full h-[5px] bg-current opacity-20 -z-10;
  }
+
+
+:root {
+  --gold-dark: #A67C00;
+  --gold-medium: #FFBF00;
+  --gold-light: #FFD700;
+  --gold-highlight: #FFF0A0;
+}
+
+@layer utilities {
+  .loading-text {
+    position: relative;
+    color: rgba(255, 255, 255, 0.9);
+    background-clip: text;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+  }
+  
+  @keyframes gold-slide {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(100%);
+      opacity: 0.7;
+    }
+  }
+  
+  .animate-gold-slide {
+    animation: gold-slide 2s ease-in-out infinite;
+    background: linear-gradient(
+      to right,
+      var(--gold-dark),
+      var(--gold-medium),
+      var(--gold-light),
+      var(--gold-highlight),
+      var(--gold-light),
+      var(--gold-medium)
+    );
+    filter: brightness(1.2) contrast(1.1);
+    mix-blend-mode: overlay;
+  }
+}
+
+/* Add the custom colors to Tailwind */
+@layer utilities {
+  .from-gold-dark {
+    --tw-gradient-from: var(--gold-dark);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(166, 124, 0, 0));
+  }
+  .via-gold-light {
+    --tw-gradient-stops: var(--tw-gradient-from), var(--gold-light), var(--tw-gradient-to, rgba(255, 215, 0, 0));
+  }
+  .to-gold-medium {
+    --tw-gradient-to: var(--gold-medium);
+  }
+}

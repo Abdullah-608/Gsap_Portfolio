@@ -12,9 +12,9 @@ results driven webs/apps`;
     <section id="home" className="flex flex-col justify-end min-h-screen">
       <AnimatedHeaderSection
         subTitle={"404 No Bugs Found"}
-        title={"Ali Sanati"}
+        title={"Abdullah Mansoor"}
         text={text}
-        textColor={"text-black"}
+        textColor={"text-gold"}
       />
       <figure
         className="absolute inset-0 -z-50"

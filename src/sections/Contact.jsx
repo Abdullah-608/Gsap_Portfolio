@@ -32,6 +32,7 @@ const Contact = () => {
       id="contact"
       className="flex flex-col justify-between min-h-screen bg-black"
     >
+      <Marquee items={items} className="text-white bg-gold" />
       <div>
         <AnimatedHeaderSection
           subTitle={"You Dream It, I Code it"}

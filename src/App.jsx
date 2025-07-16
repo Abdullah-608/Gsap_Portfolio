@@ -1,6 +1,6 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import Navbar from "./sections/Navbar";
-import Hero from "./sections/Hero"; // Hero is still eagerly loaded
+import Hero from "./sections/Hero";
 import ReactLenis from "lenis/react";
 import { useProgress } from "@react-three/drei";
 
@@ -16,7 +16,7 @@ const App = () => {
 
   useEffect(() => {
     if (progress === 100) {
-      setIsReady(true);
+      setTimeout(() => setIsReady(true), 800);
     }
   }, [progress]);
 
@@ -29,26 +29,88 @@ const App = () => {
 
   return (
     <ReactLenis root className="relative w-screen min-h-screen overflow-x-auto">
+      <style>
+        {`
+          .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+          }
+          
+          .gold-text-wrapper {
+            position: relative;
+            overflow: hidden;
+          }
+          
+          .gold-text {
+            font-size: 2.5rem;
+            font-weight: 800; /* Extra bold */
+            letter-spacing: 0.2em;
+            color: rgba(40, 40, 40, 0.7); /* Darker base color for more contrast */
+            position: relative;
+            text-transform: uppercase; /* Makes it look more premium */
+          }
+          
+          .gold-text::before {
+            content: "From Concept to Code";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: transparent;
+            background: linear-gradient(90deg, 
+              transparent 0%,
+              #BF953F 10%, /* Royal gold */
+              #FCF6BA 40%, /* Light gold */
+              #FBF5B7 45%, /* Bright gold */
+              #FFFFFF 50%, /* White highlight for extreme contrast */
+              #FBF5B7 55%, /* Bright gold */
+              #FCF6BA 60%, /* Light gold */
+              #BF953F 90%, /* Royal gold */
+              transparent 100%
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-size: 200% 100%;
+            animation: leftToRightScan 2.5s linear infinite;
+            filter: drop-shadow(0 0 5px rgba(251, 245, 183, 0.5)); /* Gold glow */
+            text-transform: uppercase;
+          }
+          
+          @keyframes leftToRightScan {
+            0% {
+              background-position: 200% 0;
+            }
+            100% {
+              background-position: -200% 0;
+            }
+          }
+        `}
+      </style>
+
       {!isReady && (
-        <div className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-black text-white transition-opacity duration-700 font-light">
-          <p className="mb-4 text-xl tracking-widest animate-pulse">
-            Loading {Math.floor(progress)}%
-          </p>
-          <div className="relative h-1 overflow-hidden rounded w-60 bg-white/20">
-            <div
-              className="absolute top-0 left-0 h-full transition-all duration-300 bg-white"
-              style={{ width: `${progress}%` }}
-            ></div>
+        <div className="loader-container">
+          <div className="gold-text-wrapper">
+            <div className="gold-text">From Concept to Code</div>
           </div>
         </div>
       )}
+      
       <div
         className={`${
           isReady ? "opacity-100" : "opacity-0"
         } transition-opacity duration-1000`}
       >
         <Navbar />
-        <Hero /> {/* Hero is not lazy loaded */}
+        <Hero />
         <Suspense fallback={sectionLoadingFallback}>
           <Services />
         </Suspense>

@@ -4,6 +4,7 @@ import { servicesData } from "../constants";
 import { useMediaQuery } from "react-responsive";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Marquee from "../components/Marquee";
 
 const Services = () => {
   const text = `I build secure, high-performance full-stack apps
@@ -12,6 +13,13 @@ const Services = () => {
   const serviceRefs = useRef([]);
   const [hoverIndex, setHoverIndex] = useState(null);
   const isDesktop = useMediaQuery({ minWidth: "48rem" }); //768px
+  const items = [
+    "just imagin, I code",
+    "just imagin, I code",
+    "just imagin, I code",
+    "just imagin, I code",
+    "just imagin, I code",
+  ];
   
   useGSAP(() => {
     serviceRefs.current.forEach((el) => {
@@ -32,6 +40,7 @@ const Services = () => {
   return (
     <section id="services" className="min-h-screen bg-gradient-to-b from-black to-zinc-900 rounded-t-4xl relative">
       {/* Subtle background elements */}
+       <Marquee items={items} className="text-white bg-gold" />
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[10%] left-[-10%] w-72 h-72 bg-purple-900/10 rounded-full blur-[120px]"></div>
         <div className="absolute bottom-[20%] right-[-10%] w-80 h-80 bg-indigo-900/10 rounded-full blur-[150px]"></div>
@@ -116,6 +125,7 @@ const Services = () => {
       
       {/* Bottom decoration */}
       <div className="h-20 bg-gradient-to-b from-transparent to-black/50"></div>
+       <Marquee items={items} className="text-white bg-gold" />
     </section>
   );
 };

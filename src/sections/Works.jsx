@@ -5,18 +5,18 @@ import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
+
 const Works = () => {
   const overlayRefs = useRef([]);
   const previewRef = useRef(null);
 
   const [currentIndex, setCurrentIndex] = useState(null);
-  const text = `Featured projects that have been meticulously
-    crafted with passion to drive
-    results and impact.`;
+  const text = ``;
 
   const mouse = useRef({ x: 0, y: 0 });
   const moveX = useRef(null);
   const moveY = useRef(null);
+  
 
   useGSAP(() => {
     moveX.current = gsap.quickTo(previewRef.current, "x", {
@@ -101,6 +101,7 @@ const Works = () => {
 
   return (
     <section id="work" className="flex flex-col min-h-screen">
+       
       <AnimatedHeaderSection
         subTitle={"Logic meets Aesthetics, Seamlessly"}
         title={"Works"}
